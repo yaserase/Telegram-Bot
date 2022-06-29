@@ -33,7 +33,7 @@ bot.command('botsohbet', async (ctx, next) => {
     })
     return next()
     
-})
+});
 
 
 bot.command('komut', async (ctx, next) => {
@@ -60,13 +60,13 @@ bot.action('all', async (ctx) => {
         [Markup.button.url('Yahoo', 'https://www.yahoo.com/')],
         [Markup.button.callback('Geri', 'geri')]
     ]))
-})
+});
 
 
 bot.action('geri', ctx => {
     ctx.deleteMessage()
     searchMessage(ctx)
-})
+});
 
 
 bot.action('kapat', ctx => {
@@ -78,7 +78,7 @@ bot.action('kapat', ctx => {
 bot.command("buton", ctx => {
     ctx.deleteMessage()
     searchMessage(ctx)
-})
+});
 
 
 function getUserLink(user) {
@@ -104,15 +104,14 @@ bot.use(
 );
 
 // Kodlarda hata çıkarsa bunun sayesinde çalışmaya devam eder.
-bot.catch((err) => {
-    console.log('Error: ', err)
-})
+bot.catch(err => res.status(501).send("User- query promise was rejected. Handle according to specific case."));
+
 
 // Botun kullanıcı adını alan bir kod.
 bot.telegram.getMe().then(botInfo => {
     bot.options.username = botInfo.username
     console.log(`Bot Başlatıldı! => ${bot.options.username}`)
-})
+});
 
 // Heroku sitesinde botunuzun kullanıcı adı gözükür -> deneyselbot.herokuapp.com
 const cb = function(req, res) {
@@ -126,7 +125,7 @@ bot.launch({
         port: `${PORT}`,
         cb
     }
-})
+});
 
 // Bu botumuzu nazikçe durdurmayı etkinleştirir.
 process.once('SIGINT', () => bot.stop('SIGINT'))
